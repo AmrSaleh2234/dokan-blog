@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Modules\Comment\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Comment\Http\Requests\CommentDeleteRequest;
 use Modules\Comment\Http\Requests\CommentStoreRequest;
 use Modules\Comment\Http\Requests\CommentUpdateRequest;
 use Modules\Comment\Services\CommentService;
@@ -48,9 +48,7 @@ class CommentController extends Controller
             return response()->json(['message' => 'Comment not found'], 404);
         }
 
-        if (!$request->user()->can('update', $comment)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $this->authorize('update', $comment);
         
         $updated = $this->commentService->updateComment($comment, $request->validated());
         
@@ -59,7 +57,7 @@ class CommentController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, int $id): JsonResponse
+    public function destroy(CommentDeleteRequest $request, int $id): JsonResponse
     {
         $comment = $this->commentService->findComment($id);
         
@@ -67,9 +65,7 @@ class CommentController extends Controller
             return response()->json(['message' => 'Comment not found'], 404);
         }
 
-        if (!$request->user()->can('delete', $comment)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $this->authorize('delete', $comment);
         
         $this->commentService->deleteComment($comment);
         

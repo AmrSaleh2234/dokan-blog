@@ -7,6 +7,7 @@ namespace Modules\Post\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Post\Http\Requests\PostDeleteRequest;
 use Modules\Post\Http\Requests\PostStoreRequest;
 use Modules\Post\Http\Requests\PostUpdateRequest;
 use Modules\Post\Services\PostService;
@@ -68,9 +69,7 @@ class PostController extends Controller
             return response()->json(['message' => 'Post not found'], 404);
         }
 
-        if (!$request->user()->can('update', $post)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $this->authorize('update', $post);
         
         $updated = $this->postService->updatePost($post, $request->validated());
         
@@ -79,7 +78,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function destroy(Request $request, int $id): JsonResponse
+    public function destroy(PostDeleteRequest $request, int $id): JsonResponse
     {
         $post = $this->postService->findPost($id);
         
@@ -87,9 +86,7 @@ class PostController extends Controller
             return response()->json(['message' => 'Post not found'], 404);
         }
 
-        if (!$request->user()->can('delete', $post)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
+        $this->authorize('delete', $post);
         
         $this->postService->deletePost($post);
         
