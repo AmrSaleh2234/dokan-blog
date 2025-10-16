@@ -1,0 +1,11 @@
+{
+    "name": "Audit",
+    "alias": "audit",
+    "description": "Audit logging module for tracking changes to models",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Audit\\Providers\\AuditServiceProvider"
+    ],
+    "files": []
+}

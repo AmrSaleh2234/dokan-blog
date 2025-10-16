@@ -33,6 +33,7 @@ Controller → Service → Repository → Model
 - **Category** - Hierarchical categories with `laravel-tree`
 - **Post** - Blog posts with soft deletes
 - **Comment** - Post comments
+- **Audit** - Laravel Auditing integration for tracking all model changes
 
 ## Installation
 
@@ -208,6 +209,18 @@ You can also test endpoints using cURL. See examples below.
 | PUT | `/api/comments/{id}` | Update comment (owner only) | Yes |
 | DELETE | `/api/comments/{id}` | Delete comment (owner only) | Yes |
 
+### Audits
+
+| Method | Endpoint | Description | Auth Required |
+|--------|----------|-------------|---------------|
+| GET | `/api/audits` | List all audit logs (paginated) | Yes |
+| GET | `/api/audits/{id}` | Show single audit log | Yes |
+| GET | `/api/audits/model/{model}` | Get audits by model type | Yes |
+| GET | `/api/audits/model/{model}/{id}` | Get audits for specific model instance | Yes |
+| GET | `/api/audits/user/{userId}` | Get audits by user | Yes |
+
+**Note:** The Audit module automatically tracks all create, update, and delete operations on Post, Comment, and Category models. Each audit log includes the user who made the change, what changed (old/new values), timestamp, IP address, and user agent.
+
 ## API Examples
 
 ### Register User
@@ -357,6 +370,7 @@ dokan-blog/
 ## Features
 
 - **Complete Postman collection** with request/response examples
+- **Audit logging** - Track all model changes with Laravel Auditing
 - Modular architecture with `nwidart/laravel-modules`
 - Hierarchical categories with `xalaida/laravel-tree`
 - Sanctum authentication
@@ -373,6 +387,7 @@ dokan-blog/
 
 - Laravel 12
 - Laravel Sanctum
+- Laravel Auditing (owen-it/laravel-auditing v14)
 - nwidart/laravel-modules v11
 - xalaida/laravel-tree v2
 - Pest PHP

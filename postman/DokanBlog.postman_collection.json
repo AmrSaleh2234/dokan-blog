@@ -551,6 +551,121 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Audits",
+      "item": [
+        {
+          "name": "List All Audits",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/audits",
+            "description": "Get paginated list of all audit logs. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/audits"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"user_id\": 1,\n      \"event\": \"updated\",\n      \"auditable_type\": \"Modules\\\\Post\\\\Entities\\\\Post\",\n      \"auditable_id\": 1,\n      \"old_values\": {\"title\": \"Old Title\"},\n      \"new_values\": {\"title\": \"Updated Title\"},\n      \"url\": \"http://localhost/api/posts/1\",\n      \"ip_address\": \"127.0.0.1\",\n      \"user_agent\": \"PostmanRuntime/7.32.3\",\n      \"tags\": null,\n      \"created_at\": \"2025-10-17T00:00:00.000000Z\",\n      \"updated_at\": \"2025-10-17T00:00:00.000000Z\",\n      \"user\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"total\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Show Audit",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/audits/1",
+            "description": "Get a single audit log by ID. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/audits/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"user_id\": 1,\n    \"event\": \"updated\",\n    \"auditable_type\": \"Modules\\\\Post\\\\Entities\\\\Post\",\n    \"auditable_id\": 1,\n    \"old_values\": {\"title\": \"Old Title\", \"content\": \"Old content\"},\n    \"new_values\": {\"title\": \"Updated Title\", \"content\": \"Updated content\"},\n    \"url\": \"http://localhost/api/posts/1\",\n    \"ip_address\": \"127.0.0.1\",\n    \"user_agent\": \"PostmanRuntime/7.32.3\",\n    \"tags\": null,\n    \"created_at\": \"2025-10-17T00:00:00.000000Z\",\n    \"updated_at\": \"2025-10-17T00:00:00.000000Z\",\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    }\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Audits by Model",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/audits/model/Modules\\\\Post\\\\Entities\\\\Post",
+            "description": "Get all audit logs for a specific model type (e.g., Post, Comment, Category). Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/audits/model/Modules\\\\Post\\\\Entities\\\\Post"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"user_id\": 1,\n      \"event\": \"created\",\n      \"auditable_type\": \"Modules\\\\Post\\\\Entities\\\\Post\",\n      \"auditable_id\": 1,\n      \"old_values\": {},\n      \"new_values\": {\"title\": \"New Post\", \"content\": \"Content...\"},\n      \"url\": \"http://localhost/api/posts\",\n      \"ip_address\": \"127.0.0.1\",\n      \"user_agent\": \"PostmanRuntime/7.32.3\",\n      \"tags\": null,\n      \"created_at\": \"2025-10-17T00:00:00.000000Z\",\n      \"updated_at\": \"2025-10-17T00:00:00.000000Z\",\n      \"user\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"total\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Audits by Model and ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/audits/model/Modules\\\\Post\\\\Entities\\\\Post/1",
+            "description": "Get all audit logs for a specific model instance (e.g., Post #1). Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/audits/model/Modules\\\\Post\\\\Entities\\\\Post/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 3,\n      \"user_id\": 1,\n      \"event\": \"updated\",\n      \"auditable_type\": \"Modules\\\\Post\\\\Entities\\\\Post\",\n      \"auditable_id\": 1,\n      \"old_values\": {\"title\": \"Old Title\"},\n      \"new_values\": {\"title\": \"Updated Again\"},\n      \"url\": \"http://localhost/api/posts/1\",\n      \"ip_address\": \"127.0.0.1\",\n      \"user_agent\": \"PostmanRuntime/7.32.3\",\n      \"tags\": null,\n      \"created_at\": \"2025-10-17T01:00:00.000000Z\",\n      \"updated_at\": \"2025-10-17T01:00:00.000000Z\",\n      \"user\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      }\n    },\n    {\n      \"id\": 1,\n      \"user_id\": 1,\n      \"event\": \"created\",\n      \"auditable_type\": \"Modules\\\\Post\\\\Entities\\\\Post\",\n      \"auditable_id\": 1,\n      \"old_values\": {},\n      \"new_values\": {\"title\": \"New Post\", \"content\": \"Content...\"},\n      \"url\": \"http://localhost/api/posts\",\n      \"ip_address\": \"127.0.0.1\",\n      \"user_agent\": \"PostmanRuntime/7.32.3\",\n      \"tags\": null,\n      \"created_at\": \"2025-10-17T00:00:00.000000Z\",\n      \"updated_at\": \"2025-10-17T00:00:00.000000Z\",\n      \"user\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"total\": 2\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Audits by User",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/audits/user/1",
+            "description": "Get all audit logs created by a specific user. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/audits/user/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 5,\n      \"user_id\": 1,\n      \"event\": \"deleted\",\n      \"auditable_type\": \"Modules\\\\Comment\\\\Entities\\\\Comment\",\n      \"auditable_id\": 2,\n      \"old_values\": {\"content\": \"Old comment\"},\n      \"new_values\": {},\n      \"url\": \"http://localhost/api/comments/2\",\n      \"ip_address\": \"127.0.0.1\",\n      \"user_agent\": \"PostmanRuntime/7.32.3\",\n      \"tags\": null,\n      \"created_at\": \"2025-10-17T02:00:00.000000Z\",\n      \"updated_at\": \"2025-10-17T02:00:00.000000Z\",\n      \"user\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"total\": 1\n  }\n}"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

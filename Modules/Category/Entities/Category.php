@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Post\Entities\Post;
 use Nevadskiy\Tree\AsTree;
+use OwenIt\Auditing\Contracts\Auditable;
 use Xalaida\LaravelTree\Traits\HasTree;
 
-class Category extends Model
+class Category extends Model implements Auditable
 {
-    use HasFactory, AsTree;
+    use HasFactory, AsTree, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'name',

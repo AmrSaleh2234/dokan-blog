@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Auth\Entities\User;
 use Modules\Post\Entities\Post;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Comment extends Model
+class Comment extends Model implements Auditable
 {
-    use HasFactory;
+    use HasFactory, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'content',

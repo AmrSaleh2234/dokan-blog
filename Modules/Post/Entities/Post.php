@@ -12,10 +12,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Auth\Entities\User;
 use Modules\Category\Entities\Category;
 use Modules\Comment\Entities\Comment;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Post extends Model
+class Post extends Model implements Auditable
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'title',

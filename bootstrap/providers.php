@@ -6,4 +6,5 @@ return [
     Modules\Category\Providers\CategoryServiceProvider::class,
     Modules\Post\Providers\PostServiceProvider::class,
     Modules\Comment\Providers\CommentServiceProvider::class,
+    Modules\Audit\Providers\AuditServiceProvider::class,
 ];

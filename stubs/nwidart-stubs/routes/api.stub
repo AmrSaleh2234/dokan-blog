@@ -1,8 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use $MODULE_NAMESPACE$\$STUDLY_NAME$\$CONTROLLER_NAMESPACE$\$STUDLY_NAME$Controller;
+declare(strict_types=1);
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('$PLURAL_LOWER_NAME$', $STUDLY_NAME$Controller::class)->names('$LOWER_NAME$');
-});
+use Illuminate\Support\Facades\Route;
+use $MODULE_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\$STUDLY_NAME$Controller;
+
+// Add your routes here
+// Example:
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::get('/$LOWER_NAME$', [$STUDLY_NAME$Controller::class, 'index']);
+//     Route::post('/$LOWER_NAME$', [$STUDLY_NAME$Controller::class, 'store']);
+// });

@@ -27,16 +27,7 @@ return [
         'enabled' => true,
         'path' => base_path('stubs/nwidart-stubs'),
         'files' => [
-            'routes/web' => 'routes/web.php',
-            'routes/api' => 'routes/api.php',
-            'views/index' => 'resources/views/index.blade.php',
-            'views/master' => 'resources/views/components/layouts/master.blade.php',
-            'scaffold/config' => 'config/config.php',
-            'composer' => 'composer.json',
-            'assets/js/app' => 'resources/assets/js/app.js',
-            'assets/sass/app' => 'resources/assets/sass/app.scss',
-            'vite' => 'vite.config.js',
-            'package' => 'package.json',
+            'routes/api' => 'Routes/api.php',
         ],
         'replacements' => [
             /**
@@ -73,7 +64,7 @@ return [
                 'APP_FOLDER_NAME',
             ],
         ],
-        'gitkeep' => true,
+        'gitkeep' => false,
     ],
     'paths' => [
         /*
@@ -116,7 +107,7 @@ return [
         | app folder name
         | for example can change it to 'src' or 'App'
         */
-        'app_folder' => 'app/',
+        'app_folder' => '',
 
         /*
         |--------------------------------------------------------------------------
@@ -145,42 +136,43 @@ return [
             'notifications' => ['path' => 'app/Notifications', 'generate' => false],
             'observer' => ['path' => 'app/Observers', 'generate' => false],
             'policies' => ['path' => 'app/Policies', 'generate' => false],
-            'provider' => ['path' => 'app/Providers', 'generate' => true],
-            'repository' => ['path' => 'app/Repositories', 'generate' => false],
-            'resource' => ['path' => 'app/Transformers', 'generate' => false],
-            'route-provider' => ['path' => 'app/Providers', 'generate' => true],
+            'provider' => ['path' => 'Providers', 'generate' => true],
+            'repository' => ['path' => 'Repositories', 'generate' => false],
+            'resource' => ['path' => 'Transformers', 'generate' => false],
+            'route-provider' => ['path' => 'Providers', 'generate' => false],
+            'event-provider' => ['path' => 'Providers', 'generate' => false],
             'rules' => ['path' => 'app/Rules', 'generate' => false],
             'services' => ['path' => 'app/Services', 'generate' => false],
             'scopes' => ['path' => 'app/Models/Scopes', 'generate' => false],
             'traits' => ['path' => 'app/Traits', 'generate' => false],
 
-            // app/Http/
-            'controller' => ['path' => 'app/Http/Controllers', 'generate' => true],
-            'filter' => ['path' => 'app/Http/Middleware', 'generate' => false],
-            'request' => ['path' => 'app/Http/Requests', 'generate' => false],
+            // Http/
+            'controller' => ['path' => 'Http/Controllers', 'generate' => true],
+            'filter' => ['path' => 'Http/Middleware', 'generate' => false],
+            'request' => ['path' => 'Http/Requests', 'generate' => false],
 
             // config/
-            'config' => ['path' => 'config', 'generate' => true],
+            'config' => ['path' => 'config', 'generate' => false],
 
-            // database/
-            'factory' => ['path' => 'database/factories', 'generate' => true],
-            'migration' => ['path' => 'database/migrations', 'generate' => true],
-            'seeder' => ['path' => 'database/seeders', 'generate' => true],
+            // Database/
+            'factory' => ['path' => 'Database/Factories', 'generate' => true],
+            'migration' => ['path' => 'Database/Migrations', 'generate' => true],
+            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
 
             // lang/
             'lang' => ['path' => 'lang', 'generate' => false],
 
             // resource/
-            'assets' => ['path' => 'resources/assets', 'generate' => true],
+            'assets' => ['path' => 'resources/assets', 'generate' => false],
             'component-view' => ['path' => 'resources/views/components', 'generate' => false],
-            'views' => ['path' => 'resources/views', 'generate' => true],
+            'views' => ['path' => 'resources/views', 'generate' => false],
 
-            // routes/
-            'routes' => ['path' => 'routes', 'generate' => true],
+            // Routes/
+            'routes' => ['path' => 'Routes', 'generate' => true],
 
-            // tests/
-            'test-feature' => ['path' => 'tests/Feature', 'generate' => true],
-            'test-unit' => ['path' => 'tests/Unit', 'generate' => true],
+            // Tests/
+            'test-feature' => ['path' => 'Tests/Feature', 'generate' => false],
+            'test-unit' => ['path' => 'Tests/Unit', 'generate' => false],
         ],
     ],
 
