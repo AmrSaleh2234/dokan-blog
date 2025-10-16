@@ -3,7 +3,7 @@
     "_postman_id": "8a9f3f0b-2f9c-4b0c-a8fc-2f1e8c9d9f1a",
     "name": "Dokan Blog API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "API collection for Dokan Blog application"
+    "description": "Complete API collection for Dokan Blog application with examples"
   },
   "auth": {
     "type": "bearer",
@@ -30,8 +30,28 @@
               "mode": "raw",
               "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
             },
-            "url": "{{base_url}}/api/auth/register"
+            "url": "{{base_url}}/api/auth/register",
+            "description": "Register a new user account. Returns authentication token that is automatically saved to environment."
           },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+                },
+                "url": "{{base_url}}/api/auth/register"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"token\": \"12|abcd1234efgh5678ijkl9012mnop3456qrst\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"created_at\": \"2025-10-16T21:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T21:00:00.000000Z\"\n  }\n}"
+            }
+          ],
           "event": [
             {
               "listen": "test",
@@ -57,8 +77,28 @@
               "mode": "raw",
               "raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\"\n}"
             },
-            "url": "{{base_url}}/api/auth/login"
+            "url": "{{base_url}}/api/auth/login",
+            "description": "Authenticate existing user. Returns authentication token that is automatically saved to environment for subsequent requests."
           },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"johndoe@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": "{{base_url}}/api/auth/login"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"token\": \"13|xyz9876lmno5432pqrs1234tuvw\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"John Doe\",\n    \"email\": \"johndoe@example.com\",\n    \"created_at\": \"2025-10-16T21:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T21:00:00.000000Z\"\n  }\n}"
+            }
+          ],
           "event": [
             {
               "listen": "test",
@@ -77,15 +117,44 @@
           "name": "Me",
           "request": {
             "method": "GET",
-            "url": "{{base_url}}/api/auth/me"
-          }
+            "url": "{{base_url}}/api/auth/me",
+            "description": "Get currently authenticated user profile information. Requires authentication token."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/auth/me"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"John Doe\",\n  \"email\": \"johndoe@example.com\",\n  \"created_at\": \"2025-10-16T21:00:00.000000Z\",\n  \"updated_at\": \"2025-10-16T21:00:00.000000Z\"\n}"
+            }
+          ]
         },
         {
           "name": "Logout",
           "request": {
             "method": "POST",
             "url": "{{base_url}}/api/auth/logout"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": "{{base_url}}/api/auth/logout"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"message\": \"Logged out successfully\"\n}"
+            }
+          ]
         }
       ]
     },
@@ -94,11 +163,39 @@
       "item": [
         {
           "name": "Tree",
-          "request": { "method": "GET", "url": "{{base_url}}/api/categories/tree" }
+          "request": { "method": "GET", "url": "{{base_url}}/api/categories/tree" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/categories/tree"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Technology\",\n      \"parent_id\": null,\n      \"children\": [\n        {\n          \"id\": 2,\n          \"name\": \"Programming\",\n          \"parent_id\": 1,\n          \"children\": []\n        },\n        {\n          \"id\": 3,\n          \"name\": \"Web Development\",\n          \"parent_id\": 1,\n          \"children\": []\n        }\n      ]\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Lifestyle\",\n      \"parent_id\": null,\n      \"children\": []\n    }\n  ]\n}"
+            }
+          ]
         },
         {
           "name": "List",
-          "request": { "method": "GET", "url": "{{base_url}}/api/categories" }
+          "request": { "method": "GET", "url": "{{base_url}}/api/categories" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/categories"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Technology\",\n      \"parent_id\": null,\n      \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T20:00:00.000000Z\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Programming\",\n      \"parent_id\": 1,\n      \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T20:00:00.000000Z\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Web Development\",\n      \"parent_id\": 1,\n      \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T20:00:00.000000Z\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"Lifestyle\",\n      \"parent_id\": null,\n      \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T20:00:00.000000Z\"\n    }\n  ]\n}"
+            }
+          ]
         },
         {
           "name": "Create",
@@ -110,11 +207,44 @@
               "raw": "{\n  \"name\": \"New Category\",\n  \"parent_id\": null\n}"
             },
             "url": "{{base_url}}/api/categories"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"New Category\",\n  \"parent_id\": null\n}"
+                },
+                "url": "{{base_url}}/api/categories"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 5,\n    \"name\": \"New Category\",\n    \"parent_id\": null,\n    \"created_at\": \"2025-10-16T21:30:00.000000Z\",\n    \"updated_at\": \"2025-10-16T21:30:00.000000Z\"\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Show",
-          "request": { "method": "GET", "url": "{{base_url}}/api/categories/1" }
+          "request": { "method": "GET", "url": "{{base_url}}/api/categories/1" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/categories/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Technology\",\n    \"parent_id\": null,\n    \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T20:00:00.000000Z\"\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Update",
@@ -126,11 +256,44 @@
               "raw": "{\n  \"name\": \"Updated Category\"\n}"
             },
             "url": "{{base_url}}/api/categories/1"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Updated Category\"\n}"
+                },
+                "url": "{{base_url}}/api/categories/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Updated Category\",\n    \"parent_id\": null,\n    \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T21:35:00.000000Z\"\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Delete",
-          "request": { "method": "DELETE", "url": "{{base_url}}/api/categories/1" }
+          "request": { "method": "DELETE", "url": "{{base_url}}/api/categories/1" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/categories/1"
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": ""
+            }
+          ]
         }
       ]
     },
@@ -139,11 +302,39 @@
       "item": [
         {
           "name": "List",
-          "request": { "method": "GET", "url": "{{base_url}}/api/posts" }
+          "request": { "method": "GET", "url": "{{base_url}}/api/posts" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/posts"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"title\": \"Getting Started with Laravel\",\n      \"content\": \"Laravel is a powerful PHP framework...\",\n      \"category_id\": 2,\n      \"user_id\": 1,\n      \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"category\": {\n        \"id\": 2,\n        \"name\": \"Programming\",\n        \"parent_id\": 1\n      },\n      \"author\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      },\n      \"comments_count\": 3\n    },\n    {\n      \"id\": 2,\n      \"title\": \"Modern Web Development Trends\",\n      \"content\": \"The web development landscape is constantly evolving...\",\n      \"category_id\": 3,\n      \"user_id\": 1,\n      \"created_at\": \"2025-10-16T19:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T19:00:00.000000Z\",\n      \"category\": {\n        \"id\": 3,\n        \"name\": \"Web Development\",\n        \"parent_id\": 1\n      },\n      \"author\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      },\n      \"comments_count\": 0\n    }\n  ],\n  \"links\": {\n    \"first\": \"http://localhost/api/posts?page=1\",\n    \"last\": \"http://localhost/api/posts?page=1\",\n    \"prev\": null,\n    \"next\": null\n  },\n  \"meta\": {\n    \"current_page\": 1,\n    \"from\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"to\": 2,\n    \"total\": 2\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Show",
-          "request": { "method": "GET", "url": "{{base_url}}/api/posts/1" }
+          "request": { "method": "GET", "url": "{{base_url}}/api/posts/1" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/posts/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"title\": \"Getting Started with Laravel\",\n    \"content\": \"Laravel is a powerful PHP framework for web artisans. It provides elegant syntax and powerful tools for building modern web applications...\",\n    \"category_id\": 2,\n    \"user_id\": 1,\n    \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T20:00:00.000000Z\",\n    \"category\": {\n      \"id\": 2,\n      \"name\": \"Programming\",\n      \"parent_id\": 1\n    },\n    \"author\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    },\n    \"comments\": [\n      {\n        \"id\": 1,\n        \"content\": \"Great post! Very helpful.\",\n        \"user_id\": 2,\n        \"post_id\": 1,\n        \"parent_id\": null,\n        \"created_at\": \"2025-10-16T20:30:00.000000Z\",\n        \"author\": {\n          \"id\": 2,\n          \"name\": \"Jane Smith\"\n        }\n      }\n    ]\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Create",
@@ -155,7 +346,26 @@
               "raw": "{\n  \"title\": \"New Blog Post\",\n  \"content\": \"Body...\",\n  \"category_id\": 1\n}"
             },
             "url": "{{base_url}}/api/posts"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"New Blog Post\",\n  \"content\": \"This is the body of my new blog post...\",\n  \"category_id\": 1\n}"
+                },
+                "url": "{{base_url}}/api/posts"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 3,\n    \"title\": \"New Blog Post\",\n    \"content\": \"This is the body of my new blog post...\",\n    \"category_id\": 1,\n    \"user_id\": 1,\n    \"created_at\": \"2025-10-16T21:45:00.000000Z\",\n    \"updated_at\": \"2025-10-16T21:45:00.000000Z\",\n    \"category\": {\n      \"id\": 1,\n      \"name\": \"Technology\",\n      \"parent_id\": null\n    },\n    \"author\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    }\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Update",
@@ -167,15 +377,62 @@
               "raw": "{\n  \"title\": \"Updated Title\",\n  \"content\": \"Updated body...\",\n  \"category_id\": 1\n}"
             },
             "url": "{{base_url}}/api/posts/1"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Updated Title\",\n  \"content\": \"Updated body content...\",\n  \"category_id\": 2\n}"
+                },
+                "url": "{{base_url}}/api/posts/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"title\": \"Updated Title\",\n    \"content\": \"Updated body content...\",\n    \"category_id\": 2,\n    \"user_id\": 1,\n    \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T21:50:00.000000Z\",\n    \"category\": {\n      \"id\": 2,\n      \"name\": \"Programming\",\n      \"parent_id\": 1\n    },\n    \"author\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    }\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Delete",
-          "request": { "method": "DELETE", "url": "{{base_url}}/api/posts/1" }
+          "request": { "method": "DELETE", "url": "{{base_url}}/api/posts/1" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/posts/1"
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": ""
+            }
+          ]
         },
         {
           "name": "By Category",
-          "request": { "method": "GET", "url": "{{base_url}}/api/categories/1/posts" }
+          "request": { "method": "GET", "url": "{{base_url}}/api/categories/1/posts" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/categories/1/posts"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 3,\n      \"title\": \"New Blog Post\",\n      \"content\": \"This is the body of my new blog post...\",\n      \"category_id\": 1,\n      \"user_id\": 1,\n      \"created_at\": \"2025-10-16T21:45:00.000000Z\",\n      \"updated_at\": \"2025-10-16T21:45:00.000000Z\",\n      \"category\": {\n        \"id\": 1,\n        \"name\": \"Technology\",\n        \"parent_id\": null\n      },\n      \"author\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      },\n      \"comments_count\": 0\n    }\n  ]\n}"
+            }
+          ]
         }
       ]
     },
@@ -192,7 +449,57 @@
               "raw": "{\n  \"content\": \"This is a comment\"\n}"
             },
             "url": "{{base_url}}/api/posts/1/comments"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"This is a great post! Thanks for sharing.\"\n}"
+                },
+                "url": "{{base_url}}/api/posts/1/comments"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 4,\n    \"content\": \"This is a great post! Thanks for sharing.\",\n    \"user_id\": 1,\n    \"post_id\": 1,\n    \"parent_id\": null,\n    \"created_at\": \"2025-10-16T22:00:00.000000Z\",\n    \"updated_at\": \"2025-10-16T22:00:00.000000Z\",\n    \"author\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    },\n    \"replies\": []\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Reply",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"Thanks for your comment!\",\n  \"parent_id\": 1\n}"
+            },
+            "url": "{{base_url}}/api/posts/1/comments"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Thanks for your comment!\",\n  \"parent_id\": 1\n}"
+                },
+                "url": "{{base_url}}/api/posts/1/comments"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 5,\n    \"content\": \"Thanks for your comment!\",\n    \"user_id\": 1,\n    \"post_id\": 1,\n    \"parent_id\": 1,\n    \"created_at\": \"2025-10-16T22:05:00.000000Z\",\n    \"updated_at\": \"2025-10-16T22:05:00.000000Z\",\n    \"author\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    },\n    \"replies\": []\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Update",
@@ -204,11 +511,44 @@
               "raw": "{\n  \"content\": \"Updated comment\"\n}"
             },
             "url": "{{base_url}}/api/comments/1"
-          }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [{ "key": "Content-Type", "value": "application/json" }],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Updated comment text with more details.\"\n}"
+                },
+                "url": "{{base_url}}/api/comments/1"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"id\": 1,\n    \"content\": \"Updated comment text with more details.\",\n    \"user_id\": 1,\n    \"post_id\": 1,\n    \"parent_id\": null,\n    \"created_at\": \"2025-10-16T20:30:00.000000Z\",\n    \"updated_at\": \"2025-10-16T22:10:00.000000Z\",\n    \"author\": {\n      \"id\": 1,\n      \"name\": \"John Doe\",\n      \"email\": \"johndoe@example.com\"\n    },\n    \"replies\": []\n  }\n}"
+            }
+          ]
         },
         {
           "name": "Delete",
-          "request": { "method": "DELETE", "url": "{{base_url}}/api/comments/1" }
+          "request": { "method": "DELETE", "url": "{{base_url}}/api/comments/1" },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "url": "{{base_url}}/api/comments/1"
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": ""
+            }
+          ]
         }
       ]
     }

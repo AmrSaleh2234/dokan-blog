@@ -8,6 +8,7 @@ Production-ready Laravel 12 blog with modular architecture, hierarchical categor
 - [DOCKER.md](./DOCKER.md) - Docker setup
 - [SETUP.md](./SETUP.md) - Detailed installation
 - [ARCHITECTURE.md](./ARCHITECTURE.md) - Architecture details
+- [Postman Collection](./postman/DokanBlog.postman_collection.json) - Complete API collection with examples
 
 ## Architecture
 
@@ -68,11 +69,11 @@ Fastest setup with all dependencies included.
 
 4. **Configure database** (edit `.env`)
    ```env
-   DB_CONNECTION=mysql
+   DB_CONNECTION=pgsql
    DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=dokan_blog
-   DB_USERNAME=root
+   DB_PORT=5432
+   DB_DATABASE=blog
+   DB_USERNAME=postgres
    DB_PASSWORD=
    ```
 
@@ -103,6 +104,33 @@ Fastest setup with all dependencies included.
 
 The API will be available at `http://localhost:8000/api`
 
+## Postman Collection
+
+A comprehensive Postman collection is available in `postman/DokanBlog.postman_collection.json` with:
+
+- ✅ **All API endpoints** documented with examples
+- ✅ **Sample requests and responses** for every endpoint
+- ✅ **Automatic token handling** - Login/Register automatically saves auth token
+- ✅ **Environment variables** - Import `postman/DokanBlog.local.postman_environment.json`
+- ✅ **Nested comments** examples showing hierarchical structure
+- ✅ **Pagination examples** for list endpoints
+
+### Import to Postman
+
+1. Open Postman
+2. Click **Import** button
+3. Import `postman/DokanBlog.postman_collection.json`
+4. Import `postman/DokanBlog.local.postman_environment.json`
+5. Select the "DokanBlog.local" environment
+6. Start with **Auth → Register** or **Auth → Login**
+
+The collection includes examples for:
+- User registration and authentication
+- Hierarchical category trees
+- Post creation with relationships
+- Nested comment threads
+- Pagination and filtering
+
 ---
 
 ```bash
@@ -121,6 +149,23 @@ See [DOCKER.md](./DOCKER.md) for details.
 ### Local Installation
 
 See [SETUP.md](./SETUP.md) for instructions.
+
+## Testing the API
+
+### Using Postman (Recommended)
+
+Import the complete Postman collection from `postman/DokanBlog.postman_collection.json` which includes:
+
+- All endpoints with example requests/responses
+- Automatic authentication token management
+- Sample data for testing
+- Environment configuration
+
+See the [Postman Collection](#postman-collection) section below for import instructions.
+
+### Using cURL
+
+You can also test endpoints using cURL. See examples below.
 
 ## API Endpoints
 
@@ -311,6 +356,7 @@ dokan-blog/
 
 ## Features
 
+- **Complete Postman collection** with request/response examples
 - Modular architecture with `nwidart/laravel-modules`
 - Hierarchical categories with `xalaida/laravel-tree`
 - Sanctum authentication
