@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Comment\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\Comment\Http\Requests\CommentDeleteRequest;
@@ -15,6 +16,8 @@ use Modules\Post\Services\PostService;
 
 class CommentController extends Controller
 {
+    use AuthorizesRequests;
+
     public function __construct(
         private readonly CommentService $commentService,
         private readonly PostService $postService

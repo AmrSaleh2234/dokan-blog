@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Post\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -15,6 +16,8 @@ use Modules\Post\Transformers\PostResource;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
+
     public function __construct(
         private readonly PostService $postService
     ) {
