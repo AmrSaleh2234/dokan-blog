@@ -42,4 +42,23 @@ class CommentRepository implements CommentRepositoryInterface
             ->latest()
             ->get();
     }
+
+    public function getTrashed(int $userId): Collection
+    {
+        return $this->model->onlyTrashed()
+            ->where('user_id', $userId)
+            ->with(['user', 'post'])
+            ->latest('deleted_at')
+            ->get();
+    }
+
+    public function findTrashed(int $id): ?Comment
+    {
+        return $this->model->onlyTrashed()->find($id);
+    }
+
+    public function restore(Comment $comment): bool
+    {
+        return $comment->restore();
+    }
 }

@@ -18,4 +18,10 @@ interface CommentRepositoryInterface
     public function delete(Comment $comment): bool;
     
     public function getByPostId(int $postId): Collection;
+    
+    public function getTrashed(int $userId): Collection;
+    
+    public function findTrashed(int $id): ?Comment;
+    
+    public function restore(Comment $comment): bool;
 }

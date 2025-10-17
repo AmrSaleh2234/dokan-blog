@@ -111,4 +111,36 @@ class PostController extends Controller
             ],
         ]);
     }
+
+    public function trashed(Request $request): JsonResponse
+    {
+        $perPage = $request->query('per_page', 15);
+        $userId = $request->user()->id;
+        $posts = $this->postService->getTrashedPosts($userId, (int) $perPage);
+        
+        return response()->json([
+            'data' => PostResource::collection($posts),
+            'meta' => [
+                'current_page' => $posts->currentPage(),
+                'last_page' => $posts->lastPage(),
+                'per_page' => $posts->perPage(),
+                'total' => $posts->total(),
+            ],
+        ]);
+    }
+
+    public function restore(Request $request, int $id): JsonResponse
+    {
+        $post = $this->postService->findTrashedPost($id);
+        
+        if (!$post) {
+            return response()->json(['message' => 'Post not found in trash'], 404);
+        }
+
+        $this->authorize('restore', $post);
+        
+        $this->postService->restorePost($post);
+        
+        return response()->json(['message' => 'Post restored successfully'], 200);
+    }
 }

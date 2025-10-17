@@ -6,6 +6,7 @@ namespace Modules\Comment\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Comment\Http\Requests\CommentDeleteRequest;
 use Modules\Comment\Http\Requests\CommentStoreRequest;
@@ -73,5 +74,30 @@ class CommentController extends Controller
         $this->commentService->deleteComment($comment);
         
         return response()->json(['message' => 'Comment deleted successfully'], 200);
+    }
+
+    public function trashed(Request $request): JsonResponse
+    {
+        $userId = $request->user()->id;
+        $comments = $this->commentService->getTrashedComments($userId);
+        
+        return response()->json([
+            'data' => CommentResource::collection($comments),
+        ]);
+    }
+
+    public function restore(Request $request, int $id): JsonResponse
+    {
+        $comment = $this->commentService->findTrashedComment($id);
+        
+        if (!$comment) {
+            return response()->json(['message' => 'Comment not found in trash'], 404);
+        }
+
+        $this->authorize('restore', $comment);
+        
+        $this->commentService->restoreComment($comment);
+        
+        return response()->json(['message' => 'Comment restored successfully'], 200);
     }
 }

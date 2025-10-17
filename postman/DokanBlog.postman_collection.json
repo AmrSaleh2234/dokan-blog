@@ -15,6 +15,17 @@
       }
     ]
   },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.request.headers.add({key: 'Accept', value: 'application/json'});"
+        ]
+      }
+    }
+  ],
   "item": [
     {
       "name": "Auth",
@@ -24,7 +35,8 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Content-Type", "value": "application/json" }
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
             ],
             "body": {
               "mode": "raw",
@@ -433,6 +445,50 @@
               "body": "{\n  \"data\": [\n    {\n      \"id\": 3,\n      \"title\": \"New Blog Post\",\n      \"content\": \"This is the body of my new blog post...\",\n      \"category_id\": 1,\n      \"user_id\": 1,\n      \"created_at\": \"2025-10-16T21:45:00.000000Z\",\n      \"updated_at\": \"2025-10-16T21:45:00.000000Z\",\n      \"category\": {\n        \"id\": 1,\n        \"name\": \"Technology\",\n        \"parent_id\": null\n      },\n      \"author\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      },\n      \"comments_count\": 0\n    }\n  ]\n}"
             }
           ]
+        },
+        {
+          "name": "Trashed Posts",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/posts/trashed",
+            "description": "Get deleted posts by authenticated user. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/posts/trashed"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 5,\n      \"title\": \"Deleted Post\",\n      \"content\": \"This post was deleted...\",\n      \"category_id\": 1,\n      \"user_id\": 1,\n      \"deleted_at\": \"2025-10-17T01:00:00.000000Z\",\n      \"created_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T20:00:00.000000Z\",\n      \"category\": {\n        \"id\": 1,\n        \"name\": \"Technology\",\n        \"parent_id\": null\n      },\n      \"author\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      },\n      \"comments_count\": 2\n    }\n  ],\n  \"meta\": {\n    \"current_page\": 1,\n    \"last_page\": 1,\n    \"per_page\": 15,\n    \"total\": 1\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Restore Post",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/posts/5/restore",
+            "description": "Restore a deleted post. Only post owner can restore. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": "{{base_url}}/api/posts/5/restore"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"message\": \"Post restored successfully\"\n}"
+            }
+          ]
         }
       ]
     },
@@ -547,6 +603,50 @@
               "_postman_previewlanguage": "json",
               "header": [{ "key": "Content-Type", "value": "application/json" }],
               "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Trashed Comments",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/comments/trashed",
+            "description": "Get deleted comments by authenticated user. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "url": "{{base_url}}/api/comments/trashed"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 10,\n      \"content\": \"This comment was deleted\",\n      \"user_id\": 1,\n      \"post_id\": 3,\n      \"deleted_at\": \"2025-10-17T01:30:00.000000Z\",\n      \"created_at\": \"2025-10-16T22:00:00.000000Z\",\n      \"updated_at\": \"2025-10-16T22:00:00.000000Z\",\n      \"author\": {\n        \"id\": 1,\n        \"name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\"\n      },\n      \"post\": {\n        \"id\": 3,\n        \"title\": \"Sample Post\"\n      }\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Restore Comment",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/comments/10/restore",
+            "description": "Restore a deleted comment. Only comment owner can restore. Requires authentication."
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "url": "{{base_url}}/api/comments/10/restore"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"message\": \"Comment restored successfully\"\n}"
             }
           ]
         }

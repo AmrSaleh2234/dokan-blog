@@ -18,4 +18,9 @@ class CommentPolicy
     {
         return $user->id === $comment->user_id;
     }
+
+    public function restore(User $user, Comment $comment): bool
+    {
+        return $user->id === $comment->user_id;
+    }
 }

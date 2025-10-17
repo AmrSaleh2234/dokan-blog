@@ -66,4 +66,24 @@ class PostRepository implements PostRepositoryInterface
             ->latest()
             ->paginate($perPage);
     }
+
+    public function getTrashed(int $userId, int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->model->onlyTrashed()
+            ->where('user_id', $userId)
+            ->with(['user', 'category'])
+            ->withCount('comments')
+            ->latest('deleted_at')
+            ->paginate($perPage);
+    }
+
+    public function findTrashed(int $id): ?Post
+    {
+        return $this->model->onlyTrashed()->find($id);
+    }
+
+    public function restore(Post $post): bool
+    {
+        return $post->restore();
+    }
 }

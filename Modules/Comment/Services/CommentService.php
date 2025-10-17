@@ -39,4 +39,19 @@ class CommentService
     {
         return $this->repository->getByPostId($postId);
     }
+
+    public function getTrashedComments(int $userId): Collection
+    {
+        return $this->repository->getTrashed($userId);
+    }
+
+    public function findTrashedComment(int $id): ?Comment
+    {
+        return $this->repository->findTrashed($id);
+    }
+
+    public function restoreComment(Comment $comment): bool
+    {
+        return $this->repository->restore($comment);
+    }
 }

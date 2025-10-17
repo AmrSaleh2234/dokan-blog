@@ -25,4 +25,10 @@ interface PostRepositoryInterface
     public function delete(Post $post): bool;
     
     public function getPostsByCategoryIds(array $categoryIds, int $perPage = 15): LengthAwarePaginator;
+    
+    public function getTrashed(int $userId, int $perPage = 15): LengthAwarePaginator;
+    
+    public function findTrashed(int $id): ?Post;
+    
+    public function restore(Post $post): bool;
 }

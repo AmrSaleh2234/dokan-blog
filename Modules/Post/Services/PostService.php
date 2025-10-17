@@ -60,4 +60,19 @@ class PostService
         
         return $this->repository->getPostsByCategoryIds($categoryIds, $perPage);
     }
+
+    public function getTrashedPosts(int $userId, int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->repository->getTrashed($userId, $perPage);
+    }
+
+    public function findTrashedPost(int $id): ?Post
+    {
+        return $this->repository->findTrashed($id);
+    }
+
+    public function restorePost(Post $post): bool
+    {
+        return $this->repository->restore($post);
+    }
 }
