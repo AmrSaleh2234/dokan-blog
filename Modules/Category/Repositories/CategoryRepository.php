@@ -44,9 +44,7 @@ class CategoryRepository implements CategoryRepositoryInterface
 
     public function getRootCategories(): Collection
     {
-        return $this->model->whereNull('parent_id')
-            ->with('children')
-            ->get();
+        return $this->model->query()->orderBy('name')->get()->tree();
     }
 
     public function getCategoryWithDescendants(int $id): ?Category

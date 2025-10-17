@@ -28,9 +28,11 @@ class CategoryTest extends TestCase
                 ],
             ]);
 
-        $this->assertEquals('Technology', $response->json('data.0.name'));
-        $this->assertEquals('Mobile', $response->json('data.0.children.0.name'));
-        $this->assertEquals('Android', $response->json('data.0.children.0.children.0.name'));
+        // Ordered alphabetically: Lifestyle comes before Technology
+        $this->assertEquals('Lifestyle', $response->json('data.0.name'));
+        $this->assertEquals('Technology', $response->json('data.1.name'));
+        $this->assertEquals('Mobile', $response->json('data.1.children.0.name'));
+        $this->assertEquals('Android', $response->json('data.1.children.0.children.0.name'));
     }
 
     public function test_it_can_list_all_categories(): void

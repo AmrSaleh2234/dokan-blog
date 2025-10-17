@@ -110,7 +110,7 @@ class CommentTest extends TestCase
         ])->deleteJson("/api/comments/{$comment->id}");
 
         $response->assertOk();
-        $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+        $this->assertSoftDeleted('comments', ['id' => $comment->id]);
     }
 
     public function test_non_owner_cannot_delete_comment(): void
