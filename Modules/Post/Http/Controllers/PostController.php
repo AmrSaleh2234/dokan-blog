@@ -112,6 +112,22 @@ class PostController extends Controller
         ]);
     }
 
+    public function byCategoryOnly(Request $request, int $categoryId): JsonResponse
+    {
+        $perPage = $request->query('per_page', 15);
+        $posts = $this->postService->getPostsByCategoryOnly($categoryId, (int) $perPage);
+        
+        return response()->json([
+            'data' => PostResource::collection($posts),
+            'meta' => [
+                'current_page' => $posts->currentPage(),
+                'last_page' => $posts->lastPage(),
+                'per_page' => $posts->perPage(),
+                'total' => $posts->total(),
+            ],
+        ]);
+    }
+
     public function trashed(Request $request): JsonResponse
     {
         $perPage = $request->query('per_page', 15);

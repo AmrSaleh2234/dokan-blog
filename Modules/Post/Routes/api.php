@@ -20,3 +20,4 @@ Route::prefix('posts')->group(function () {
 });
 
 Route::get('categories/{categoryId}/posts', [PostController::class, 'byCategory']);
+Route::get('categories/{categoryId}/posts/direct', [PostController::class, 'byCategoryOnly']);

@@ -49,10 +49,4 @@ class CategoryService
     {
         return $this->repository->getCategoryWithDescendants($id);
     }
-
-    public function getDescendantIds(Category $category): array
-    {
-        $descendants = $category->descendants()->pluck('id')->toArray();
-        return array_merge([$category->id], $descendants);
-    }
 }

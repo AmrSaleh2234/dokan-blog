@@ -56,9 +56,26 @@ class PostService
             return $this->repository->getPostsByCategoryIds([], $perPage);
         }
 
-        $categoryIds = $this->categoryService->getDescendantIds($category);
+        return $category->postsWithDescendants()
+            ->with(['user', 'category'])
+            ->withCount('comments')
+            ->latest()
+            ->paginate($perPage);
+    }
+
+    public function getPostsByCategoryOnly(int $categoryId, int $perPage = 15): LengthAwarePaginator
+    {
+        $category = $this->categoryService->findCategory($categoryId);
         
-        return $this->repository->getPostsByCategoryIds($categoryIds, $perPage);
+        if (!$category) {
+            return $this->repository->getPostsByCategoryIds([], $perPage);
+        }
+
+        return $category->posts()
+            ->with(['user', 'category'])
+            ->withCount('comments')
+            ->latest()
+            ->paginate($perPage);
     }
 
     public function getTrashedPosts(int $userId, int $perPage = 15): LengthAwarePaginator

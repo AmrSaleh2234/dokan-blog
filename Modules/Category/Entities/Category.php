@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Post\Entities\Post;
 use Nevadskiy\Tree\AsTree;
+use Nevadskiy\Tree\Relations\HasManyDeep;
 use OwenIt\Auditing\Contracts\Auditable;
 use Xalaida\LaravelTree\Traits\HasTree;
 
@@ -26,11 +27,19 @@ class Category extends Model implements Auditable
     ];
 
     /**
-     * Get all posts in this category
+     * Get all posts in this category (direct children only)
      */
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get all posts in this category and its descendants
+     */
+    public function postsWithDescendants(): HasManyDeep
+    {
+        return HasManyDeep::between($this, Post::class);
     }
 
     /**
